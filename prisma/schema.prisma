@@ -12,17 +12,24 @@ datasource db {
   provider = "postgresql"
 }
 
+enum User_Role {
+  ADMIN
+  SUPER_ADMIN
+  USER
+}
+
 model User {
-  id        Int     @id @default(autoincrement())
+  id        String    @id @default(uuid())
   firstName String
   lastName  String
-  email     String  @unique
-  phone     String  @unique
-  isActive  Boolean @default(true)
+  email     String    @unique
+  phone     String    @unique
+  isActive  Boolean   @default(true)
+  role      User_Role @default(USER)
 
   refreshToken String
   passwordHash String
-  profile Profile?
+  profile      Profile?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -30,14 +37,13 @@ model User {
   @@unique([firstName, lastName])
 }
 
-
 model Profile {
-  id Int @id @default(autoincrement()) 
-  bio String? 
+  id     String    @id @default(uuid())
+  bio    String?
   avatar String?
 
-  user User @relation(fields: [userId] ,references: [id])
-  userId Int @unique
+  user   User @relation(fields: [userId], references: [id])
+  userId String  @unique
 
   updatedAt DateTime @default(now())
 }

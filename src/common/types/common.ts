@@ -21,3 +21,15 @@ export type ApiMeta = {
   total: number;
   totalPages: number;
 };
+
+export type TokenPayload = {
+  sub: string;
+  email: string;
+  role: string;
+};
+
+export type AuthUser = {
+  sub: string;
+  email: string;
+  role: string;
+};

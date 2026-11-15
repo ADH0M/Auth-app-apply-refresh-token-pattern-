@@ -30,6 +30,7 @@ export const errorHandler = (
       code,
       details,
     });
+    return ;
   }
 
   if (error instanceof PrismaClientKnownRequestError) {

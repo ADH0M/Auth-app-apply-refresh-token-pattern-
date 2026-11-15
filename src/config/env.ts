@@ -14,6 +14,13 @@ const shcema = z.object({
         value.startsWith("postgresql://") || value.startsWith("postgres://"),
       { error: "Invalid DATABASE_URL" },
     ),
+  BCRYPT_SALT_ROUNDS: z.coerce.number().int().min(8).max(30).default(12),
+  JWT_ACCESS_TOKEN_SECRET: z.string().min(20).max(100),
+  JWT_REFRESH_TOKEN_SECRET: z.string().min(20).max(100),
+  JWT_AUDINCE: z.string().min(10).default("AUTH_APPLICATION"),
+  JWT_ISSUER: z.string().min(10).default("AUTH_APPLICATION"),
+  JWT_ACCESS_TOKEN_EXPIRES_IN :z.string().default("15m"),
+  JWT_REFRESH_TOKEN_EXPIRES_IN :z.string().default("7d"),
 });
 
 const pasered = shcema.safeParse(process.env);

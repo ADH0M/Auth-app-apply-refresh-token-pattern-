@@ -1,0 +1,10 @@
+import type { LoginResult } from "../../modules/auth/types";
+import type { AuthUser } from "./common";
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: AuthUser;
+    }
+  }
+}
