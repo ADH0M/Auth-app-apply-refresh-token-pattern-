@@ -1,3 +1,4 @@
+import type { User } from "../../generated/prisma/client";
 import type { ApiMeta, ApiSuccess } from "../types/common";
 
 // 200
@@ -19,3 +20,10 @@ export const pagenated = <T>(
 ): { success: boolean; data: T[]; meta: ApiMeta } => {
   return { success: true, data, meta };
 };
+
+// omit password 
+export function omitPassword(data:User):Omit<User ,"passwordHash">{
+const {passwordHash:_PH,...safe} = data;
+void _PH;
+return safe
+}
